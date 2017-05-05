@@ -477,7 +477,7 @@ class EditableUserDefinedForm_Controller extends UserDefinedForm_Controller
             $messages[$field->Name] = $field->getErrorMessage()->HTML();
             $formField = $field->getFormField();
 
-            if ($field->Required && $field->CustomRules()->Count() == 0) {
+            if ($field->Required) {
                 if (isset($data[$field->Name])) {
                     $formField->setValue($data[$field->Name]);
                 }
@@ -738,4 +738,28 @@ class EditableUserDefinedForm_Controller extends UserDefinedForm_Controller
 
         return $submittedForm;
     }
+}
+/**
+ * Email that gets sent to the people listed in the Email Recipients when a 
+ * submission is made.
+ *
+ * @package userforms
+ */
+class UserDefinedForm_SubmittedFormEmail extends Email {
+	
+	protected $ss_template = "SubmittedFormEmail";
+	protected $data;
+	public function __construct($submittedFields = null) {
+		parent::__construct($submittedFields = null);
+	}
+	
+	/**
+	 * Set the "Reply-To" header with an email address rather than append as
+	 * {@link Email::replyTo} does. 
+	 *
+	 * @param string $email The email address to set the "Reply-To" header to
+ 	 */
+	public function setReplyTo($email) {
+		$this->customHeaders['Reply-To'] = $email;
+	}  
 }
