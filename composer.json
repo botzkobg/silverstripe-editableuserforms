@@ -12,7 +12,7 @@
 	],
 	"require": {
 		"silverstripe/userforms": "~3.0",
-		"unclecheese/dropzone": "dev-master"
+		"unclecheese/dropzone": "1.4.14"
 	},
 	"extra": {
 		"branch-alias": {
